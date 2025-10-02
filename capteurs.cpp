@@ -3,7 +3,7 @@
 //Déclaration des fonctions
 int moyenneCapteur(int valActuel);
 int minCapteur(int min,int valActuel);
-int maxCapteur(int max,int valActuel);
+int maxCapteur(int max, int valActuel);
 
 //Déclaration des constantes
 using namespace std;
