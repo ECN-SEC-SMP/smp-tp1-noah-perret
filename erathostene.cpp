@@ -13,7 +13,6 @@ const int nbEntierTotal = 100; // Nombre d'entier à vérifier (n)
 
 
 
-
 int  main (void){
     unsigned int tabEntier[nbEntierTotal]; // création du tableau pour stocker les ventiers
     unsigned int *ptrTabEntier = tabEntier; // Pointeur vers le tableau; 

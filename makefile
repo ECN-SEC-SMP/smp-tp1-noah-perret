@@ -2,11 +2,13 @@
 EXEC_PROGRAM1 = fibonacci
 EXEC_PROGRAM2 = capteurs
 EXEC_PROGRAM3 = erathostene
+EXEC_PROGRAM4 = PGCD
+
 
 
 # === Règles ===
 
-all: $(EXEC_PROGRAM1) $(EXEC_PROGRAM2) $(EXEC_PROGRAM3)
+all: $(EXEC_PROGRAM1) $(EXEC_PROGRAM2) $(EXEC_PROGRAM3) $(EXEC_PROGRAM4)
 
 # Compilation de fibonacci
 $(EXEC_PROGRAM1): fibonacci.o
@@ -29,8 +31,15 @@ $(EXEC_PROGRAM3): erathostene.o
 erathostene.o: erathostene.cpp
 	g++ -I./include -c erathostene.cpp
 
+# Compilation de PGCD
+$(EXEC_PROGRAM4): PGCD.o
+	g++ -o $(EXEC_PROGRAM4) PGCD.o
+
+PGCD.o: PGCD.cpp
+	g++ -I./include -c PGCD.cpp
+
 # Nettoyage
 clean:
-	rm -f *.o $(EXEC_PROGRAM1) $(EXEC_PROGRAM2) $(EXEC_PROGRAM3)
+	rm -f *.o $(EXEC_PROGRAM1) $(EXEC_PROGRAM2) $(EXEC_PROGRAM3) $(EXEC_PROGRAM4)
 
 .PHONY: all clean
