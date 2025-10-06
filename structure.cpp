@@ -5,9 +5,11 @@
 
 //Déclaration des constantes
 using namespace std;
-#define SQUARE    // Carre 20 x 20
+//#define SQUARE    // Carre 20 x 20
 //#define RECTANGLE // Rectangle 40 (largeur) x 20 (hauteur)
-//#define LOSANGE// Losange centré à (0, 0)
+//#define LOSANGE // Losange centré à (0, 0)
+//#define TRIANGLE
+#define  PENTAGONE
 
 
 #ifdef SQUARE
@@ -54,6 +56,33 @@ using namespace std;
     const int COORD_D_Y = -10;
 #endif
 
+#ifdef TRIANGLE
+    const int COORD_A_X = 0;
+    const int COORD_A_Y = 0;
+
+    const int COORD_B_X = 10;
+    const int COORD_B_Y = 0;
+
+    const int COORD_C_X = 5;
+    const int COORD_C_Y = 8;
+#endif
+
+#ifdef PENTAGONE
+    const int COORD_A_X = 0;
+    const int COORD_A_Y = 0;
+
+    const int COORD_B_X = 4;
+    const int COORD_B_Y = 8;
+
+    const int COORD_C_X = 10;
+    const int COORD_C_Y = 6;
+
+    const int COORD_D_X = 8;
+    const int COORD_D_Y = 0;
+
+    const int COORD_E_X = 3;
+    const int COORD_E_Y = -4;
+#endif
 
 //Déclaration des structures
 struct point // structure pour un point dans un plan
@@ -91,21 +120,40 @@ int  main (void){
     ptC.y = COORD_C_Y;
     ptC.nom ='C';
 
+    #ifndef TRIANGLE
     point ptD;
     ptD.x = COORD_D_X;
     ptD.y = COORD_D_Y;
     ptD.nom ='D';
+    #endif
+
+    #ifdef PENTAGONE
+    point ptE;
+    ptE.x = COORD_E_X;
+    ptE.y = COORD_E_Y;
+    ptE.nom ='E';
+    #endif
 
     //création du polygone
-    polygone carre;
+    polygone poly1;
 
     //ajout des points au polygone
-    carre.CoordSommets.push_back(ptA);
-    carre.CoordSommets.push_back(ptB);
-    carre.CoordSommets.push_back(ptC);
-    carre.CoordSommets.push_back(ptD);
+    poly1.CoordSommets.push_back(ptA);
+    poly1.CoordSommets.push_back(ptB);
+    poly1.CoordSommets.push_back(ptC);
 
-    cout << "Le périmètre du carré est de : " << calculPerimetre(carre) << endl;
+    //Supression du 3ème point pour le triangle
+    #ifndef TRIANGLE
+    poly1.CoordSommets.push_back(ptD);
+    #endif
+
+    //AJout du 5ème pour le pentagone
+    #ifdef PENTAGONE
+    poly1.CoordSommets.push_back(ptE);
+    #endif
+
+
+    cout << "Le périmètre du polygone est de : " << calculPerimetre(poly1) << endl;
 
     
     return 0;
@@ -124,11 +172,11 @@ int  main (void){
     float perimetre = 0;
 
 
-    for (unsigned int i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < poly.CoordSommets.size()-1; i++)
     {
-        perimetre += sqrt(pow((poly.CoordSommets[i+1].x-poly.CoordSommets[i].x),2) + pow((poly.CoordSommets[i+1].y-poly.CoordSommets[i].y),2) ); // calcul les 3 premier sommets
+        perimetre += sqrt(pow((poly.CoordSommets[i+1].x-poly.CoordSommets[i].x),2) + pow((poly.CoordSommets[i+1].y-poly.CoordSommets[i].y),2) ); // calcul de tout les sommets sauf le dernier
     }
-        perimetre += sqrt(pow((poly.CoordSommets[0].x-poly.CoordSommets[3].x),2) + pow((poly.CoordSommets[0].y-poly.CoordSommets[3].y),2) ); // rajoute le dernier
+        perimetre += sqrt(pow((poly.CoordSommets[0].x-poly.CoordSommets[poly.CoordSommets.size()-1].x),2) + pow((poly.CoordSommets[0].y-poly.CoordSommets[poly.CoordSommets.size()-1].y),2) ); // rajoute le dernier
 
 
     return perimetre;

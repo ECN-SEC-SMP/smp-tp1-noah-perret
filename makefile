@@ -49,6 +49,6 @@ structure.o: structure.cpp
 
 # Nettoyage
 clean:
-	rm -f *.o $(EXEC_PROGRAM1) $(EXEC_PROGRAM2) $(EXEC_PROGRAM3) $(EXEC_PROGRAM4)$(EXEC_PROGRAM5)
+	rm -f *.o $(EXEC_PROGRAM1) $(EXEC_PROGRAM2) $(EXEC_PROGRAM3) $(EXEC_PROGRAM4) $(EXEC_PROGRAM5)
 
 .PHONY: all clean
