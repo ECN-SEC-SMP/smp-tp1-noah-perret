@@ -5,6 +5,8 @@
 
 //Déclaration des constantes
 using namespace std;
+// Permet de définir la forme du polygone en décommentant la ligne correspondante
+
 //#define SQUARE    // Carre 20 x 20
 //#define RECTANGLE // Rectangle 40 (largeur) x 20 (hauteur)
 //#define LOSANGE // Losange centré à (0, 0)
@@ -170,15 +172,20 @@ int  main (void){
  */
  float calculPerimetre(polygone poly){
     float perimetre = 0;
+    int XcoordDiff, YcoordDiff;
 
-
+    // calcul de la distance entre chaque point
     for (unsigned int i = 0; i < poly.CoordSommets.size()-1; i++)
-    {
-        perimetre += sqrt(pow((poly.CoordSommets[i+1].x-poly.CoordSommets[i].x),2) + pow((poly.CoordSommets[i+1].y-poly.CoordSommets[i].y),2) ); // calcul de tout les sommets sauf le dernier
+    {   
+        XcoordDiff = poly.CoordSommets[i+1].x-poly.CoordSommets[i].x; // différence entre les coordonnées x de deux points
+        YcoordDiff = poly.CoordSommets[i+1].y-poly.CoordSommets[i].y; // différence entre les coordonnées y de deux points
+        perimetre += sqrt(pow(XcoordDiff,2) + pow((YcoordDiff),2) ); // calcul de tout les sommets sauf le dernier
     }
-        perimetre += sqrt(pow((poly.CoordSommets[0].x-poly.CoordSommets[poly.CoordSommets.size()-1].x),2) + pow((poly.CoordSommets[0].y-poly.CoordSommets[poly.CoordSommets.size()-1].y),2) ); // rajoute le dernier
-
-
+        // rajoute le dernier côté entre le dernier et le premier point 
+        XcoordDiff = poly.CoordSommets[0].x-poly.CoordSommets[poly.CoordSommets.size()-1].x;
+        YcoordDiff = poly.CoordSommets[0].y-poly.CoordSommets[poly.CoordSommets.size()-1].y;
+        perimetre += sqrt(pow(XcoordDiff,2) + pow(YcoordDiff,2)); 
+        
     return perimetre;
 }
 
